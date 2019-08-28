@@ -12,8 +12,7 @@
 
     <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
 </head>
-<body>S
-
+<body>
 <footer>
     <div class="contact">
         <h2>Skontaktuj się z nami</h2>
@@ -35,7 +34,5 @@
         </div>
     </div>
 </footer>
-
-<script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
