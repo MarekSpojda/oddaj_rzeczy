@@ -190,9 +190,4 @@ document.addEventListener("DOMContentLoaded", function () {
     if (form !== null) {
         new FormSteps(form);
     }
-
-    var listOfInstitutions = function () {
-        var repo = Java.type("pl.coderslab.charity.repository.InstitutionRepository");
-        console.log(repo.findAll());
-    }
 });
