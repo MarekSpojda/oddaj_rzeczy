@@ -2,13 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Document</title>
+    <title>Oddaj rzeczy</title>
 
     <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
 </head>
@@ -26,7 +27,7 @@
         </div>
 
         <div class="stats--item">
-            <em>${sessionScope.allinstitutions}</em>
+            <em>${sessionScope.allinstitutionsamount}</em>
             <h3>Wspartych organizacji</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam magnam, sint nihil cupiditate quas
                 quam.</p>
@@ -35,7 +36,7 @@
     </div>
 </section>
 
-<section class="steps">
+<section class="steps" id="whatisallabout">
     <h2>Wystarczą 4 proste kroki</h2>
 
     <div class="steps--container">
@@ -61,10 +62,11 @@
         </div>
     </div>
 
+
     <a href="#" class="btn btn--large">Załóż konto</a>
 </section>
 
-<section class="about-us">
+<section class="about-us" id="aboutus">
     <div class="about-us--text">
         <h2>O nas</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas vitae animi rem pariatur incidunt libero
@@ -75,7 +77,7 @@
     </div>
 </section>
 
-<section class="help">
+<section class="help" id="institutions">
     <h2>Komu pomagamy?</h2>
 
     <!-- SLIDE 1 -->
