@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Oddaj rzeczy</title>
-
     <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
 </head>
 <body>
@@ -40,7 +39,7 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form action="form-confirmation.html" method="post">
+        <form:form action="form-confirmation.html" method="post" modelAttribute="donation">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
@@ -54,7 +53,7 @@
                         />
                         <span class="checkbox"></span>
                         <span class="description"
-                        >ubrania, które nadają się do ponownego użycia</span
+                        >${sessionScope.categories[0].name}</span
                         >
                     </label>
                 </div>
@@ -67,7 +66,7 @@
                                 value="clothes-useless"
                         />
                         <span class="checkbox"></span>
-                        <span class="description">ubrania, do wyrzucenia</span>
+                        <span class="description">${sessionScope.categories[1].name}</span>
                     </label>
                 </div>
 
@@ -75,7 +74,7 @@
                     <label>
                         <input type="checkbox" name="categories" value="toys"/>
                         <span class="checkbox"></span>
-                        <span class="description">zabawki</span>
+                        <span class="description">${sessionScope.categories[2].name}</span>
                     </label>
                 </div>
 
@@ -83,7 +82,7 @@
                     <label>
                         <input type="checkbox" name="categories" value="books"/>
                         <span class="checkbox"></span>
-                        <span class="description">książki</span>
+                        <span class="description">${sessionScope.categories[3].name}</span>
                     </label>
                 </div>
 
@@ -91,7 +90,7 @@
                     <label>
                         <input type="checkbox" name="categories" value="other"/>
                         <span class="checkbox"></span>
-                        <span class="description">inne</span>
+                        <span class="description">${sessionScope.categories[4].name}</span>
                     </label>
                 </div>
 
@@ -107,7 +106,8 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <input type="number" name="bags" step="1" min="1"/>
+                        <input type="number" name="quantity" step="1" min="1"/>
+                            <%--                        <input type="number" name="bags" step="1" min="1"/>--%>
                     </label>
                 </div>
 
@@ -119,36 +119,24 @@
 
 
             <!-- STEP 4 -->
+            <!-- STEP 3? -->
             <div data-step="3">
-                <h3>Wybierz organizacje, której chcesz pomóc:</h3>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="radio" name="organization" value="old"/>
-                        <span class="checkbox radio"></span>
-                        <span class="description">
-                  <div class="title">Fundacja “Bez domu”</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc dla osób nie posiadających miejsca
-                    zamieszkania
-                  </div>
-                </span>
-                    </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="radio" name="organization" value="old"/>
-                        <span class="checkbox radio"></span>
-                        <span class="description">
-                  <div class="title">Fundacja “Dla dzieci"</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji
-                    życiowej.
-                  </div>
-                </span>
-                    </label>
-                </div>
+                <h3>Wybierz organizację, której chcesz pomóc:</h3>
+                <c:forEach varStatus="counter" items="${sessionScope.institutions}">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <input type="radio" name="organization"
+                                   value="${sessionScope.institutions[counter.index].name}"/>
+                            <span class="checkbox radio"></span>
+                            <span class="description">
+                                <div class="title">Fundacja “${sessionScope.institutions[counter.index].name}"</div>
+                                <div class="subtitle">
+                                ${sessionScope.institutions[counter.index].description}.
+                                </div>
+                            </span>
+                        </label>
+                    </div>
+                </c:forEach>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
@@ -157,14 +145,15 @@
             </div>
 
             <!-- STEP 5 -->
+            <!-- STEP 4? -->
             <div data-step="4">
-                <h3>Podaj adres oraz termin odbioru rzecz przez kuriera:</h3>
+                <h3>Podaj adres oraz termin odbioru rzeczy przez kuriera:</h3>
 
                 <div class="form-section form-section--columns">
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <input type="text" name="address"/> </label>
+                            <label> Ulica <input type="text" name="street" id="streetID"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
@@ -173,7 +162,7 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <input type="text" name="postcode"/>
+                                Kod pocztowy <input type="text" name="zipcode"/>
                             </label>
                         </div>
 
@@ -187,17 +176,17 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <input type="date" name="data"/> </label>
+                            <label> Data <input type="date" name="pickUpDate"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <input type="time" name="time"/> </label>
+                            <label> Godzina <input type="time" name="pickUpTime"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <textarea name="more_info" rows="5"></textarea>
+                                <textarea name="pickUpComment" rows="5"></textarea>
                             </label>
                         </div>
                     </div>
@@ -236,7 +225,11 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
+                                <li id="liStreetID">Pomyłkowa 21</li>
+                                <script>
+                                    var x = document.getElementById("streetID");
+                                    document.getElementById("liStreetID").innerHTML = x.value;
+                                </script>
                                 <li>Warszawa</li>
                                 <li>99-098</li>
                                 <li>123 456 789</li>
@@ -259,7 +252,7 @@
                     <button type="submit" class="btn">Potwierdzam</button>
                 </div>
             </div>
-        </form>
+        </form:form>
     </div>
 </section>
 
