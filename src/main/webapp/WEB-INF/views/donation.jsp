@@ -14,6 +14,34 @@
 </head>
 <body>
 
+<script>
+    function createSummary() {
+        var x = document.getElementById("streetID");
+        document.getElementById("liStreetID").innerHTML = x.value;
+        x = document.getElementById("cityID");
+        document.getElementById("liCityID").innerHTML = x.value;
+        x = document.getElementById("codeID");
+        document.getElementById("liCodeID").innerHTML = x.value;
+        x = document.getElementById("phoneID");
+        document.getElementById("liPhoneID").innerHTML = x.value;
+        x = document.getElementById("quantityID");
+        document.getElementById("liQuantityID").innerHTML = x.value + ',';
+        x = document.getElementById("dateID");
+        document.getElementById("liDateID").innerHTML = x.value;
+        x = document.getElementById("timeID");
+        document.getElementById("liTimeID").innerHTML = x.value;
+        x = document.getElementById("commentID");
+        document.getElementById("liCommentID").innerHTML = x.value;
+
+        var radioElems = document.getElementsByName('organization');
+
+        for (i = 0; i < radioElems.length; i++) {
+            if (radioElems[i].checked)
+                document.getElementById("liInstitutionNameID").innerHTML = '"' + radioElems[i].value + '"';
+        }
+    }
+</script>
+
 <%@include file="header.jsp" %>
 
 <section class="form--steps">
@@ -106,7 +134,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <input type="number" name="quantity" step="1" min="1"/>
+                        <input type="number" name="quantity" step="1" min="1" id="quantityID"/>
                             <%--                        <input type="number" name="bags" step="1" min="1"/>--%>
                     </label>
                 </div>
@@ -157,18 +185,18 @@
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Miasto <input type="text" name="city"/> </label>
+                            <label> Miasto <input type="text" name="city" id="cityID"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <input type="text" name="zipcode"/>
+                                Kod pocztowy <input type="text" name="zipcode" id="codeID"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <input type="phone" name="phone"/>
+                                Numer telefonu <input type="phone" name="phone" id="phoneID"/>
                             </label>
                         </div>
                     </div>
@@ -176,24 +204,24 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <input type="date" name="pickUpDate"/> </label>
+                            <label> Data <input type="date" name="pickUpDate" id="dateID"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <input type="time" name="pickUpTime"/> </label>
+                            <label> Godzina <input type="time" name="pickUpTime" id="timeID"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <textarea name="pickUpComment" rows="5"></textarea>
+                                <textarea name="pickUpComment" rows="5" id="commentID"></textarea>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button type="button" class="btn next-step" onclick="createSummary()">Dalej</button>
                 </div>
             </div>
 
@@ -207,16 +235,13 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
-                                >
+                                <span class="summary--text">worki w ilości <div
+                                        id="liQuantityID">0,</div> zawartość </span>
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span
-                                >
+                                <span class="summary--text">Dla fundacji <div id="liInstitutionNameID">Default institution</div></span>
                             </li>
                         </ul>
                     </div>
@@ -225,23 +250,19 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li id="liStreetID">Pomyłkowa 21</li>
-                                <script>
-                                    var x = document.getElementById("streetID");
-                                    document.getElementById("liStreetID").innerHTML = x.value;
-                                </script>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                                <li id="liStreetID">Default street</li>
+                                <li id="liCityID">Default city</li>
+                                <li id="liCodeID">default code</li>
+                                <li id="liPhoneID">Default phone</li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                                <li id="liDateID">00/00/0000</li>
+                                <li id="liTimeID">00:00</li>
+                                <li id="liCommentID">Brak uwag</li>
                             </ul>
                         </div>
                     </div>
