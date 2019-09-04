@@ -2,6 +2,7 @@ package pl.coderslab.charity;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.repository.CategoryRepository;
@@ -21,5 +22,10 @@ public class DonationController {
         session.setAttribute("categories", categoryRepository.findAll());
         model.addAttribute("donation", new Donation());
         return "donation";
+    }
+
+    @PostMapping("/confirm")
+    public String confirm() {
+        return "confirm";
     }
 }
