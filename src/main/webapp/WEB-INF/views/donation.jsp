@@ -39,6 +39,15 @@
             if (radioElems[i].checked)
                 document.getElementById("liInstitutionNameID").innerHTML = '"' + radioElems[i].value + '"';
         }
+
+        // insideID
+        var categoriesElems = document.getElementsByName('categories');
+        var categoriesSummary = '';
+        for (i = 0; i < categoriesElems.length; i++) {
+            if (categoriesElems[i].checked)
+                categoriesSummary += categoriesElems[i].nextElementSibling.nextElementSibling.innerHTML + ', ';
+        }
+        document.getElementById("liInsideID").innerHTML = categoriesSummary;
     }
 </script>
 
@@ -80,9 +89,7 @@
                                 value="clothes-to-use"
                         />
                         <span class="checkbox"></span>
-                        <span class="description"
-                        >${sessionScope.categories[0].name}</span
-                        >
+                        <span class="description">${sessionScope.categories[0].name}</span>
                     </label>
                 </div>
 
@@ -236,7 +243,7 @@
                             <li>
                                 <span class="icon icon-bag"></span>
                                 <span class="summary--text">worki w ilości <div
-                                        id="liQuantityID">0,</div> zawartość </span>
+                                        id="liQuantityID">0,</div> zawartość: <div id="liInsideID">(default value)</div></span>
                             </li>
 
                             <li>
