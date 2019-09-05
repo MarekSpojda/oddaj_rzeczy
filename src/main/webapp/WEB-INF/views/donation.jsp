@@ -1,3 +1,4 @@
+<%@ page import="pl.coderslab.charity.utilities.Utilities" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -36,8 +37,14 @@
         var radioElems = document.getElementsByName('organization');
 
         for (i = 0; i < radioElems.length; i++) {
-            if (radioElems[i].checked)
+            if (radioElems[i].checked) {
+                <%--                <c:forEach varStatus="counter" items="${sessionScope.institutions}">--%>
+                <%--                if (counter.index == i)--%>
+                <%--                    document.getElementById("liInstitutionNameID").innerHTML = '"' + ${sessionScope.institutions[counter.index].name}+'"';--%>
+                <%--                </c:forEach>--%>
                 document.getElementById("liInstitutionNameID").innerHTML = '"' + radioElems[i].value + '"';
+                // document.getElementById("liInstitutionNameID").innerHTML = '"' + radioElems[i].value + '"';
+            }
         }
 
         // insideID
@@ -94,18 +101,16 @@
             <div class="form--steps-container">
                 <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-                <form:form action="/confirm" method="post" modelAttribute="donation">
+                <form action="${pageContext.request.contextPath}/confirm" method="post">
+                    <%--                    <form:form action="/confirm" method="post" modelAttribute="donation">--%>
                     <!-- STEP 1: class .active is switching steps -->
                     <div data-step="1" class="active">
                         <h3>Zaznacz co chcesz oddać:</h3>
 
                         <div class="form-group form-group--checkbox">
                             <label>
-                                <input
-                                        type="checkbox"
-                                        name="categories"
-                                        value="clothes-to-use"
-                                />
+                                <%--<input type="checkbox" name="categories" value="clothes-to-use"/>--%>
+                                <input type="checkbox" name="categories" value="1"/>
                                 <span class="checkbox"></span>
                                 <span class="description">${sessionScope.categories[0].name}</span>
                             </label>
@@ -113,11 +118,8 @@
 
                         <div class="form-group form-group--checkbox">
                             <label>
-                                <input
-                                        type="checkbox"
-                                        name="categories"
-                                        value="clothes-useless"
-                                />
+                                <%--<input type="checkbox" name="categories" value="clothes-useless"/>--%>
+                                <input type="checkbox" name="categories" value="2"/>
                                 <span class="checkbox"></span>
                                 <span class="description">${sessionScope.categories[1].name}</span>
                             </label>
@@ -125,7 +127,8 @@
 
                         <div class="form-group form-group--checkbox">
                             <label>
-                                <input type="checkbox" name="categories" value="toys"/>
+                                <%--<input type="checkbox" name="categories" value="toys"/>--%>
+                                <input type="checkbox" name="categories" value="3"/>
                                 <span class="checkbox"></span>
                                 <span class="description">${sessionScope.categories[2].name}</span>
                             </label>
@@ -133,7 +136,8 @@
 
                         <div class="form-group form-group--checkbox">
                             <label>
-                                <input type="checkbox" name="categories" value="books"/>
+                                <%--<input type="checkbox" name="categories" value="books"/>--%>
+                                <input type="checkbox" name="categories" value="4"/>
                                 <span class="checkbox"></span>
                                 <span class="description">${sessionScope.categories[3].name}</span>
                             </label>
@@ -141,7 +145,8 @@
 
                         <div class="form-group form-group--checkbox">
                             <label>
-                                <input type="checkbox" name="categories" value="other"/>
+                                <%--<input type="checkbox" name="categories" value="other"/>--%>
+                                <input type="checkbox" name="categories" value="5"/>
                                 <span class="checkbox"></span>
                                 <span class="description">${sessionScope.categories[4].name}</span>
                             </label>
@@ -160,7 +165,7 @@
                             <label>
                                 Liczba 60l worków:
                                 <input type="number" name="quantity" step="1" min="1" id="quantityID"/>
-                                    <%--                        <input type="number" name="bags" step="1" min="1"/>--%>
+                                <%--<input type="number" name="bags" step="1" min="1"/>--%>
                             </label>
                         </div>
 
@@ -179,7 +184,7 @@
                             <div class="form-group form-group--checkbox">
                                 <label>
                                     <input type="radio" name="organization"
-                                           value="${sessionScope.institutions[counter.index].name}"/>
+                                           value="${sessionScope.institutions[counter.index].id}"/>
                                     <span class="checkbox radio"></span>
                                     <span class="description">
                                 <div class="title">Fundacja “${sessionScope.institutions[counter.index].name}"</div>
@@ -299,7 +304,7 @@
                             <button type="submit" class="btn">Potwierdzam</button>
                         </div>
                     </div>
-                </form:form>
+                </form>
             </div>
         </section>
     </div>
