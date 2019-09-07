@@ -36,7 +36,7 @@ public class DonationController {
         return "donation";
     }
 
-    @PostMapping("/confirm")
+    @PostMapping(path = "/confirm", produces = "text/html; charset=UTF-8")
     public String confirm(HttpServletRequest request) {
         //@ModelAttribute("donation") Donation donation,
         String[] stringCategories = request.getParameterValues("categories");

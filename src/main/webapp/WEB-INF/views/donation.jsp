@@ -38,12 +38,7 @@
 
         for (i = 0; i < radioElems.length; i++) {
             if (radioElems[i].checked) {
-                <%--                <c:forEach varStatus="counter" items="${sessionScope.institutions}">--%>
-                <%--                if (counter.index == i)--%>
-                <%--                    document.getElementById("liInstitutionNameID").innerHTML = '"' + ${sessionScope.institutions[counter.index].name}+'"';--%>
-                <%--                </c:forEach>--%>
-                document.getElementById("liInstitutionNameID").innerHTML = '"' + radioElems[i].value + '"';
-                // document.getElementById("liInstitutionNameID").innerHTML = '"' + radioElems[i].value + '"';
+                document.getElementById("liInstitutionNameID").innerHTML = '"' + radioElems[i].dataset.orgname + '"';
             }
         }
 
@@ -184,7 +179,8 @@
                             <div class="form-group form-group--checkbox">
                                 <label>
                                     <input type="radio" name="organization"
-                                           value="${sessionScope.institutions[counter.index].id}"/>
+                                           value="${sessionScope.institutions[counter.index].id}"
+                                           data-orgname="${sessionScope.institutions[counter.index].name}"/>
                                     <span class="checkbox radio"></span>
                                     <span class="description">
                                 <div class="title">Fundacja “${sessionScope.institutions[counter.index].name}"</div>
