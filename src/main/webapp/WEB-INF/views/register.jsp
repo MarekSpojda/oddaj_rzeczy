@@ -9,11 +9,11 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Oddaj rzeczy</title>
-
+    <title>Oddaj rzeczy - rejestracja</title>
     <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
 </head>
 <body>
+
 <header class="header--form-page">
     <nav class="container container--70">
         <ul class="nav--actions">
@@ -31,16 +31,34 @@
         </ul>
     </nav>
 
-    <div class="slogan container container--90">
-        <h2>
-            Dziękujemy za przesłanie formularza.
-            Cieszymy się, że chcesz pomóc!
-        </h2>
-    </div>
+    <section class="login-page">
+        <h2>Załóż konto</h2>
+        <form action="/register" method="post">
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Imię"/>
+            </div>
+            <div class="form-group">
+                <input type="text" name="usersurname" placeholder="Nazwisko"/>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Email"/>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Hasło"/>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password2" placeholder="Powtórz hasło"/>
+            </div>
+
+            <div class="form-group form-group--buttons">
+                <a href="/login" class="btn btn--without-border">Zaloguj się</a>
+                <button class="btn" type="submit">Załóż konto</button>
+            </div>
+        </form>
+    </section>
 </header>
 
-<%@include file="footer.jsp" %>
-
 <script src="<c:url value="resources/js/app.js"/>"></script>
+
 </body>
 </html>
