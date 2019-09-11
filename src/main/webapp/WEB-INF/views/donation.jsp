@@ -101,51 +101,16 @@
                     <!-- STEP 1: class .active is switching steps -->
                     <div data-step="1" class="active">
                         <h3>Zaznacz co chcesz oddać:</h3>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <%--<input type="checkbox" name="categories" value="clothes-to-use"/>--%>
-                                <input type="checkbox" name="categories" value="1"/>
-                                <span class="checkbox"></span>
-                                <span class="description">${sessionScope.categories[0].name}</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <%--<input type="checkbox" name="categories" value="clothes-useless"/>--%>
-                                <input type="checkbox" name="categories" value="2"/>
-                                <span class="checkbox"></span>
-                                <span class="description">${sessionScope.categories[1].name}</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <%--<input type="checkbox" name="categories" value="toys"/>--%>
-                                <input type="checkbox" name="categories" value="3"/>
-                                <span class="checkbox"></span>
-                                <span class="description">${sessionScope.categories[2].name}</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <%--<input type="checkbox" name="categories" value="books"/>--%>
-                                <input type="checkbox" name="categories" value="4"/>
-                                <span class="checkbox"></span>
-                                <span class="description">${sessionScope.categories[3].name}</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <%--<input type="checkbox" name="categories" value="other"/>--%>
-                                <input type="checkbox" name="categories" value="5"/>
-                                <span class="checkbox"></span>
-                                <span class="description">${sessionScope.categories[4].name}</span>
-                            </label>
-                        </div>
+                        <c:forEach varStatus="counter" items="${sessionScope.categories}">
+                            <div class="form-group form-group--checkbox">
+                                <label>
+                                        <%--<input type="checkbox" name="categories" value="clothes-to-use"/>--%>
+                                    <input type="checkbox" name="categories" value="${counter.index}"/>
+                                    <span class="checkbox"></span>
+                                    <span class="description">${sessionScope.categories[counter.index].name}</span>
+                                </label>
+                            </div>
+                        </c:forEach>
 
                         <div class="form-group form-group--buttons">
                             <button type="button" class="btn next-step">Dalej</button>
