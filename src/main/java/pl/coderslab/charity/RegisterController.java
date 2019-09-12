@@ -1,5 +1,6 @@
 package pl.coderslab.charity;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class RegisterController {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public RegisterController(UserRepository userRepository) {
+    public RegisterController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/register")
@@ -38,7 +41,7 @@ public class RegisterController {
         userToDatabase.setUsername(username);
         userToDatabase.setUsersurname(usersurname);
         userToDatabase.setEmail(email);
-        //TODO hash password
+        userToDatabase.setPassword(passwordEncoder.encode(password));
 
         userRepository.save(userToDatabase);
 
