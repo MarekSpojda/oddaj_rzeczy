@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .defaultSuccessUrl("/", true).failureForwardUrl("/errorlogin")
+                .defaultSuccessUrl("/", true)
                 .failureUrl("/errorlogin");
 
 //        http.csrf().disable();

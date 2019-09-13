@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class CustomUserDetails extends User implements UserDetails {
 
 //TODO Currently handled with one role for an user
 
-        Set<Role> userRole = super.getRoles();
+        List<Role> userRole = super.getRoles();
 
         if (userRole != null) {
             for (Role role : userRole) {

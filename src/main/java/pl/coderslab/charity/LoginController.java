@@ -20,14 +20,15 @@ public class LoginController {
         //TODO login things
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/secure/hello")
     @ResponseBody
     public String securedHello() {
         return "Secured hello";
     }
 
-    @RequestMapping("/errorlogin")
+    @RequestMapping("/errorpage")
     public String errorLogin() {
         return "errorlogin";
     }
