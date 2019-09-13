@@ -15,13 +15,13 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping(path = "/login")
-    public void loginPost() {
-        //TODO login things
-    }
+//    @PostMapping(path = "/login")
+//    public void loginPost() {
+//        //TO DO login things
+//    }
 
-//    @PreAuthorize("hasAnyRole('ADMIN')")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/secure/hello")
     @ResponseBody
     public String securedHello() {
