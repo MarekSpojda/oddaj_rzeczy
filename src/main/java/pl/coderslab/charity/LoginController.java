@@ -26,4 +26,9 @@ public class LoginController {
     public String securedHello() {
         return "Secured hello";
     }
+
+    @RequestMapping("/errorlogin")
+    public String errorLogin() {
+        return "errorlogin";
+    }
 }
