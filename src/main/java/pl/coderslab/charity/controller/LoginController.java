@@ -5,8 +5,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 
 @Controller
 public class LoginController implements ErrorController {
@@ -17,12 +15,11 @@ public class LoginController implements ErrorController {
         return "login";
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
 //    @PreAuthorize("hasAnyAuthority('ADMIN')")
-    @GetMapping("/secure/hello")
-    @ResponseBody
+    @GetMapping("/logged")
     public String securedHello() {
-        return "Secured hello";
+        return "index_log";
     }
 
     @RequestMapping(value = PATH)

@@ -41,7 +41,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll();
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .permitAll();
     }
 
     private PasswordEncoder getPasswordEncoder() {

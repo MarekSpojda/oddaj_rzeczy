@@ -1,4 +1,4 @@
-package pl.coderslab.charity;
+package pl.coderslab.charity.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +10,7 @@ import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
+import pl.coderslab.charity.repository.UserRepository;
 import pl.coderslab.charity.utilities.Utilities;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,16 +23,20 @@ public class DonationController {
     private final CategoryRepository categoryRepository;
     private final DonationRepository donationRepository;
     private final InstitutionRepository institutionRepository;
+    private final UserRepository userRepository;
 
-    public DonationController(CategoryRepository categoryRepository, DonationRepository donationRepository, InstitutionRepository institutionRepository) {
+    public DonationController(CategoryRepository categoryRepository, DonationRepository donationRepository, InstitutionRepository institutionRepository, UserRepository userRepository) {
         this.categoryRepository = categoryRepository;
         this.donationRepository = donationRepository;
         this.institutionRepository = institutionRepository;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping("/donation")
-    public String donation(Model model, HttpSession session) {
+    public String donation(Model model, HttpSession session, HttpServletRequest httpServletRequest) {
+        session.setAttribute("institutions", institutionRepository.findAll());
         session.setAttribute("categories", categoryRepository.findAll());
+        session.setAttribute("topMenu", Utilities.topSiteMenu(httpServletRequest, userRepository));
         model.addAttribute("donation", new Donation());
         return "donation";
     }
