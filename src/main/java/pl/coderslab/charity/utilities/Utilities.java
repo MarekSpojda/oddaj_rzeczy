@@ -44,6 +44,7 @@ public class Utilities {
                     + user.getUsername()
                     + " "
                     + user.getUsersurname()
+                    + "</button><li><a href=\"/logged\" class=\"btn btn--small btn--highlighted\">Menu</a></li>"
                     + "</button><li><a href=\"/logout\" class=\"btn btn--small btn--highlighted\">Wyloguj</a></li>";
         }
         return toReturn;

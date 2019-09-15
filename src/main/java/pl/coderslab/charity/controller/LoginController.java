@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LoginController implements ErrorController {
@@ -18,8 +19,8 @@ public class LoginController implements ErrorController {
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
 //    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/logged")
-    public String securedHello() {
-        return "index_log";
+    public String onlyForLoggedIn() {
+        return "logged";
     }
 
     @RequestMapping(value = PATH)
