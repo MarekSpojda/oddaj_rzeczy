@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -17,8 +18,20 @@
 <header class="header--form-page">
     <nav class="container container--70">
         <ul class="nav--actions">
-            <li><a href="/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
-            <li><a href="/register" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+<%--            <li><a href="/login" class="btn btn--small btn--highlighted">Zaloguj</a></li>--%>
+<%--            <li><a href="/register" class="btn btn--small btn--highlighted">Załóż konto</a></li>--%>
+            <sec:authentication var="user" property="principal"/>
+            <sec:authorize access="hasRole('ROLE_USER') and isAuthenticated()">
+                <li>
+                    <button class="btn btn--small btn--highlighted">Witaj ${user.name} ${user.surname}</button>
+                </li>
+                <li><a href="/logout" class="btn btn--small btn--highlighted">Wyloguj</a></li>
+            </sec:authorize>
+
+            <sec:authorize access="!isAuthenticated()">
+                <li><a href="/login" class="btn btn--small btn--highlighted">Zaloguj</a></li>
+                <li><a href="/register" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+            </sec:authorize>
         </ul>
 
         <ul>

@@ -9,8 +9,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userid;
-    private String username;
-    private String usersurname;
+    private String name;
+    private String surname;
     private String email;
     private String password;
     private int active = 1;
@@ -25,8 +25,8 @@ public class User {
         this.active = user.getActive();
         this.email = user.getEmail();
         this.roles = user.getRoles();
-        this.username = user.getUsername();
-        this.usersurname = user.getUsersurname();
+        this.name = user.getName();
+        this.surname = user.getSurname();
         this.userid = user.getUserid();
         this.password = user.getPassword();
     }
@@ -39,20 +39,20 @@ public class User {
         this.userid = userid;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUsersurname() {
-        return usersurname;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setUsersurname(String usersurname) {
-        this.usersurname = usersurname;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {

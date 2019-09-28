@@ -32,8 +32,8 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String registerPost(HttpServletRequest request) {
-        String username = request.getParameter("username");
-        String usersurname = request.getParameter("usersurname");
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String password2 = request.getParameter("password2");
@@ -44,8 +44,8 @@ public class RegisterController {
         }
 
         User userToDatabase = new User();
-        userToDatabase.setUsername(username);
-        userToDatabase.setUsersurname(usersurname);
+        userToDatabase.setName(name);
+        userToDatabase.setSurname(surname);
         userToDatabase.setEmail(email);
         userToDatabase.setPassword(passwordEncoder.encode(password));
 

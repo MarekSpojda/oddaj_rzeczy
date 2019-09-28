@@ -33,6 +33,16 @@ public class CustomUserDetails extends User implements UserDetails {
     }
 
     @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public String getSurname() {
+        return super.getSurname();
+    }
+
+    @Override
     public List<Role> getRoles() {
         return super.getRoles();
     }

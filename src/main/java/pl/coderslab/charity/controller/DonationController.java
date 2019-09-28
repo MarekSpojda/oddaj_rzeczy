@@ -15,6 +15,8 @@ import pl.coderslab.charity.utilities.Utilities;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,10 +76,10 @@ public class DonationController {
         donation.setPhoneNumber(request.getParameter("phone"));
 
         //Fill pickUpDate in donation object
-        donation.setPickUpDate(Utilities.stringToLocalDate(request.getParameter("pickUpDate")));
+        donation.setPickUpDate(LocalDate.parse(request.getParameter("pickUpDate")));
 
         //Fill pickUpTime in donation object
-        donation.setPickUpTime(Utilities.stringToLocalTime(request.getParameter("pickUpTime")));
+        donation.setPickUpTime(LocalTime.parse(request.getParameter("pickUpTime")));
 
         //Fill pickUpComment in donation object
         donation.setPickUpComment(request.getParameter("pickUpComment"));
