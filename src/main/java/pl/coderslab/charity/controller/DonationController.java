@@ -38,7 +38,7 @@ public class DonationController {
     public String donation(Model model, HttpSession session, HttpServletRequest httpServletRequest) {
         session.setAttribute("institutions", institutionRepository.findAll());
         session.setAttribute("categories", categoryRepository.findAll());
-        session.setAttribute("topMenu", Utilities.topSiteMenu(httpServletRequest, userRepository));
+//        session.setAttribute("topMenu", Utilities.topSiteMenu(httpServletRequest, userRepository));
         model.addAttribute("donation", new Donation());
         return "donation";
     }
@@ -52,7 +52,9 @@ public class DonationController {
 
         //Fill categories in donation object
         for (String str : stringCategories) {
-            categories.add(categoryRepository.findByIdCustom(Long.parseLong(str)));
+            if (categoryRepository.findById(Long.parseLong(str)).isPresent()) {
+                categories.add(categoryRepository.findById(Long.parseLong(str)).get());
+            }
         }
         donation.setCategories(categories);
 

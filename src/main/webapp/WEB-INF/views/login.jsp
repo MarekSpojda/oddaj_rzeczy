@@ -25,6 +25,7 @@
                 <li>
                     <button class="btn btn--small btn--highlighted">Witaj ${user.name} ${user.surname}</button>
                 </li>
+                <li><a href="/logged" class="btn btn--small btn--highlighted">Menu</a></li>
                 <li><a href="/logout" class="btn btn--small btn--highlighted">Wyloguj</a></li>
             </sec:authorize>
 

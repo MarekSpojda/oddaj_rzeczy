@@ -51,7 +51,9 @@ public class RegisterController {
 
         //Adding role 'USER' to new user
         List<Role> roles = new ArrayList<>();
-        roles.add(roleRepository.findByIdCustom(2L));
+        if (roleRepository.findById(2L).isPresent()) {
+            roles.add(roleRepository.findById(2L).get());
+        }
         userToDatabase.setRoles(roles);
 
         userRepository.save(userToDatabase);

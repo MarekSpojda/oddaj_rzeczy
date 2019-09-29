@@ -7,6 +7,6 @@ import pl.coderslab.charity.entity.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
-    @Query("select r from Role r where r.id=?1")
-    Role findByIdCustom(Long id);
+//    @Query("select r from Role r where r.id=?1")
+//    Role findByIdCustom(Long id);
 }

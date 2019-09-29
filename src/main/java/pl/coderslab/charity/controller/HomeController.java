@@ -27,7 +27,7 @@ public class HomeController {
         session.setAttribute("institutions", institutionRepository.findAll());
         session.setAttribute("allbags", DonationRepository.findAllBags(donationRepository.findAll()));
         session.setAttribute("allinstitutionsamount", institutionRepository.findAll().size());
-        session.setAttribute("topMenu", Utilities.topSiteMenu(httpServletRequest, userRepository));
+//        session.setAttribute("topMenu", Utilities.topSiteMenu(httpServletRequest, userRepository));
         return "index";
     }
 }
