@@ -112,13 +112,14 @@
                     <!-- STEP 1: class .active is switching steps -->
                     <div data-step="1" class="active">
                         <h3>Zaznacz co chcesz oddać:</h3>
-                        <c:forEach varStatus="counter" items="${sessionScope.categories}">
+                        <c:forEach varStatus="counter" items="${categories}">
                             <div class="form-group form-group--checkbox">
                                 <label>
                                         <%--<input type="checkbox" name="categories" value="clothes-to-use"/>--%>
-                                    <input type="checkbox" name="categories" value="${counter.index}"/>
+                                    <input type="checkbox" name="categories"
+                                           value="${counter.index}"/>
                                     <span class="checkbox"></span>
-                                    <span class="description">${sessionScope.categories[counter.index].name}</span>
+                                    <span class="description">${categories[counter.index].name}</span>
                                 </label>
                             </div>
                         </c:forEach>
@@ -135,7 +136,8 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Liczba 60l worków:
-                                <input type="number" name="quantity" step="1" min="1" id="quantityID"/>
+                                <input type="number" name="quantity" step="1" min="1"
+                                       id="quantityID"/>
                                 <%--<input type="number" name="bags" step="1" min="1"/>--%>
                             </label>
                         </div>
@@ -151,17 +153,17 @@
                     <!-- STEP 3? -->
                     <div data-step="3">
                         <h3>Wybierz organizację, której chcesz pomóc:</h3>
-                        <c:forEach varStatus="counter" items="${sessionScope.institutions}">
+                        <c:forEach varStatus="counter" items="${institutions}">
                             <div class="form-group form-group--checkbox">
                                 <label>
                                     <input type="radio" name="organization"
-                                           value="${sessionScope.institutions[counter.index].id}"
-                                           data-orgname="${sessionScope.institutions[counter.index].name}"/>
+                                           value="${institutions[counter.index].id}"
+                                           data-orgname="${institutions[counter.index].name}"/>
                                     <span class="checkbox radio"></span>
                                     <span class="description">
-                                <div class="title">Fundacja “${sessionScope.institutions[counter.index].name}"</div>
+                                <div class="title">Fundacja “${institutions[counter.index].name}"</div>
                                 <div class="subtitle">
-                                ${sessionScope.institutions[counter.index].description}.
+                                ${institutions[counter.index].description}.
                                 </div>
                             </span>
                                 </label>
@@ -183,11 +185,13 @@
                             <div class="form-section--column">
                                 <h4>Adres odbioru</h4>
                                 <div class="form-group form-group--inline">
-                                    <label> Ulica <input type="text" name="street" id="streetID"/> </label>
+                                    <label> Ulica <input type="text" name="street"
+                                                         id="streetID"/> </label>
                                 </div>
 
                                 <div class="form-group form-group--inline">
-                                    <label> Miasto <input type="text" name="city" id="cityID"/> </label>
+                                    <label> Miasto <input type="text" name="city"
+                                                          id="cityID"/> </label>
                                 </div>
 
                                 <div class="form-group form-group--inline">
@@ -198,7 +202,8 @@
 
                                 <div class="form-group form-group--inline">
                                     <label>
-                                        Numer telefonu <input type="phone" name="phone" id="phoneID"/>
+                                        Numer telefonu <input type="phone" name="phone"
+                                                              id="phoneID"/>
                                     </label>
                                 </div>
                             </div>
@@ -206,17 +211,20 @@
                             <div class="form-section--column">
                                 <h4>Termin odbioru</h4>
                                 <div class="form-group form-group--inline">
-                                    <label> Data <input type="date" name="pickUpDate" id="dateID"/> </label>
+                                    <label> Data <input type="date" name="pickUpDate"
+                                                        id="dateID"/> </label>
                                 </div>
 
                                 <div class="form-group form-group--inline">
-                                    <label> Godzina <input type="time" name="pickUpTime" id="timeID"/> </label>
+                                    <label> Godzina <input type="time" name="pickUpTime"
+                                                           id="timeID"/> </label>
                                 </div>
 
                                 <div class="form-group form-group--inline">
                                     <label>
                                         Uwagi dla kuriera
-                                        <textarea name="pickUpComment" rows="5" id="commentID"></textarea>
+                                        <textarea name="pickUpComment" rows="5"
+                                                  id="commentID"></textarea>
                                     </label>
                                 </div>
                             </div>

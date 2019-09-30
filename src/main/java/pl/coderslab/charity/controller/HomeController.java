@@ -1,14 +1,18 @@
 package pl.coderslab.charity.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.charity.entity.Donation;
+import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.repository.UserRepository;
-import pl.coderslab.charity.utilities.Utilities;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -23,11 +27,14 @@ public class HomeController {
     }
 
     @RequestMapping("/")
-    public String homeAction(HttpSession session, HttpServletRequest httpServletRequest) {
-        session.setAttribute("institutions", institutionRepository.findAll());
+    public String homeAction(HttpSession session) {
         session.setAttribute("allbags", DonationRepository.findAllBags(donationRepository.findAll()));
         session.setAttribute("allinstitutionsamount", institutionRepository.findAll().size());
-//        session.setAttribute("topMenu", Utilities.topSiteMenu(httpServletRequest, userRepository));
         return "index";
+    }
+
+    @ModelAttribute("institutions")
+    public List<Institution> getInstitutions() {
+        return institutionRepository.findAll();
     }
 }

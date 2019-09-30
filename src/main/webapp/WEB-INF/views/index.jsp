@@ -85,22 +85,22 @@
         <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.
             Możesz sprawdzić czym się zajmują.</p>
 
-        <c:forEach varStatus="counter" step="2" items="${sessionScope.institutions}">
+        <c:forEach varStatus="counter" step="2" items="${institutions}">
             <ul class="help--slides-items">
                 <li>
                     <div class="col">
                         <div class="title">Fundacja "<c:out
-                                value="${sessionScope.institutions[counter.index].name}"/>"
+                                value="${institutions[counter.index].name}"/>"
                         </div>
                         <div class="subtitle">Cel i misja: <c:out
-                                value="${sessionScope.institutions[counter.index].description}"/>.
+                                value="${institutions[counter.index].description}"/>.
                         </div>
                     </div>
 
                     <div class="col">
-                        <div class="title">Fundacja "<c:out value="${sessionScope.institutions[counter.index+1].name}"/>"</div>
+                        <div class="title">Fundacja "<c:out value="${institutions[counter.index+1].name}"/>"</div>
                         <div class="subtitle">Cel i misja: <c:out
-                                value="${sessionScope.institutions[counter.index+1].description}"/>.
+                                value="${institutions[counter.index+1].description}"/>.
                         </div>
                     </div>
                 </li>

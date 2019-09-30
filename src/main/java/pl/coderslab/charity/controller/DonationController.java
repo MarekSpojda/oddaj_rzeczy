@@ -2,6 +2,8 @@ package pl.coderslab.charity.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.entity.Category;
@@ -11,7 +13,6 @@ import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.repository.UserRepository;
-import pl.coderslab.charity.utilities.Utilities;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,20 +35,17 @@ public class DonationController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping("/donation")
-    public String donation(Model model, HttpSession session, HttpServletRequest httpServletRequest) {
-        session.setAttribute("institutions", institutionRepository.findAll());
-        session.setAttribute("categories", categoryRepository.findAll());
-//        session.setAttribute("topMenu", Utilities.topSiteMenu(httpServletRequest, userRepository));
+    @GetMapping("/donation")
+    public String donation(Model model) {
         model.addAttribute("donation", new Donation());
         return "donation";
     }
 
     @PostMapping(path = "/confirm", produces = "text/html; charset=UTF-8")
-    public String confirm(HttpServletRequest request) {
+    public String confirm(@ModelAttribute("donation") Donation donation, HttpServletRequest request) {
         //@ModelAttribute("donation") Donation donation,
         String[] stringCategories = request.getParameterValues("categories");
-        Donation donation = new Donation();
+//        Donation donation = new Donation();
         List<Category> categories = new ArrayList<>();
 
         //Fill categories in donation object
@@ -89,4 +87,19 @@ public class DonationController {
         donationRepository.save(donation);
         return "confirm";
     }
+
+    @ModelAttribute("categories")
+    public List<Category> getCategories() {
+        return categoryRepository.findAll();
+    }
+
+    @ModelAttribute("institutions")
+    public List<Institution> getInstitutions() {
+        return institutionRepository.findAll();
+    }
+
+//    @ModelAttribute("donation")
+//    public Donation getDonation() {
+//        return new Donation();
+//    }
 }
