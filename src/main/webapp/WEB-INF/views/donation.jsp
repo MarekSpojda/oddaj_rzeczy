@@ -34,7 +34,7 @@
         x = document.getElementById("commentID");
         document.getElementById("liCommentID").innerHTML = x.value;
 
-        var radioElems = document.getElementsByName('organization');
+        var radioElems = document.getElementsByName('institution');
 
         for (i = 0; i < radioElems.length; i++) {
             if (radioElems[i].checked) {
@@ -107,7 +107,7 @@
             <div class="form--steps-container">
                 <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-                <form action="${pageContext.request.contextPath}/confirm" method="post">
+                <form:form action="${pageContext.request.contextPath}/confirm" modelAttribute="donation" method="post">
                     <%--                    <form:form action="/confirm" method="post" modelAttribute="donation">--%>
                     <!-- STEP 1: class .active is switching steps -->
                     <div data-step="1" class="active">
@@ -138,7 +138,7 @@
                                 Liczba 60l worków:
                                 <input type="number" name="quantity" step="1" min="1"
                                        id="quantityID"/>
-                                <%--<input type="number" name="bags" step="1" min="1"/>--%>
+                                    <%--<input type="number" name="bags" step="1" min="1"/>--%>
                             </label>
                         </div>
 
@@ -156,7 +156,7 @@
                         <c:forEach varStatus="counter" items="${institutions}">
                             <div class="form-group form-group--checkbox">
                                 <label>
-                                    <input type="radio" name="organization"
+                                    <input type="radio" name="institution"
                                            value="${institutions[counter.index].id}"
                                            data-orgname="${institutions[counter.index].name}"/>
                                     <span class="checkbox radio"></span>
@@ -196,13 +196,13 @@
 
                                 <div class="form-group form-group--inline">
                                     <label>
-                                        Kod pocztowy <input type="text" name="zipcode" id="codeID"/>
+                                        Kod pocztowy <input type="text" name="zipCode" id="codeID"/>
                                     </label>
                                 </div>
 
                                 <div class="form-group form-group--inline">
                                     <label>
-                                        Numer telefonu <input type="phone" name="phone"
+                                        Numer telefonu <input type="phone" name="phoneNumber"
                                                               id="phoneID"/>
                                     </label>
                                 </div>
@@ -284,7 +284,7 @@
                             <button type="submit" class="btn">Potwierdzam</button>
                         </div>
                     </div>
-                </form>
+                </form:form>
             </div>
         </section>
     </div>
