@@ -19,6 +19,8 @@ public class LoginController implements ErrorController {
 //    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/logged")
     public String onlyForLoggedIn() {
+        //This method display content that should be viewable only to logged users, such as menus or account manager.
+        //TODO Should be filled with content.
         return "logged";
     }
 
