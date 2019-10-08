@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class UserDTO {
-    private Long userid;
+    //    private Long userid;
     private String name;
     private String surname;
     private String email;
