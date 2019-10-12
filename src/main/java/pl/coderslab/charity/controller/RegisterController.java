@@ -3,15 +3,12 @@ package pl.coderslab.charity.controller;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.coderslab.charity.entity.Role;
+import pl.coderslab.charity.dto.UserDTO;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.RoleRepository;
 import pl.coderslab.charity.repository.UserRepository;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class RegisterController {
@@ -31,33 +28,19 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String registerPost(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String password2 = request.getParameter("password2");
-
-        boolean emailExist = userRepository.existsByEmail(email);
-        if (emailExist || !password.equals(password2)) {
+    public String registerPost(@ModelAttribute("userDTO") UserDTO userDTO) {
+        boolean emailExist = userRepository.existsByEmail(userDTO.getEmail());
+        if (emailExist || !userDTO.getPassword().equals(userDTO.getPassword2())) {
             return "redirect:/register";
         }
 
-        User userToDatabase = new User();
-        userToDatabase.setName(name);
-        userToDatabase.setSurname(surname);
-        userToDatabase.setEmail(email);
-        userToDatabase.setPassword(passwordEncoder.encode(password));
-
-        //Adding role 'USER' to new user
-        List<Role> roles = new ArrayList<>();
-        if (roleRepository.findById(2L).isPresent()) {
-            roles.add(roleRepository.findById(2L).get());
-        }
-        userToDatabase.setRoles(roles);
-
+        User userToDatabase = new User(userDTO, roleRepository);
         userRepository.save(userToDatabase);
-
         return "redirect:/";
+    }
+
+    @ModelAttribute("userDTO")
+    public UserDTO getUserDTO() {
+        return new UserDTO();
     }
 }

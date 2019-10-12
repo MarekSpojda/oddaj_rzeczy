@@ -1,6 +1,11 @@
 package pl.coderslab.charity.entity;
 
+import pl.coderslab.charity.config.SecurityConfiguration;
+import pl.coderslab.charity.dto.UserDTO;
+import pl.coderslab.charity.repository.RoleRepository;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,6 +33,20 @@ public class User {
         this.surname = user.getSurname();
         this.userid = user.getUserid();
         this.password = user.getPassword();
+    }
+
+    public User(UserDTO userDTO, RoleRepository roleRepository) {
+        this.setName(userDTO.getName());
+        this.setSurname(userDTO.getSurname());
+        this.setEmail(userDTO.getEmail());
+        this.setPassword(new SecurityConfiguration().passwordEncoder().encode(userDTO.getPassword()));
+
+        //Adding role 'USER' to new user if that role is present in table under index 2
+        List<Role> roles = new ArrayList<>();
+        if (roleRepository.findById(2L).isPresent()) {
+            roles.add(roleRepository.findById(2L).get());
+        }
+        this.setRoles(roles);
     }
 
     public Long getUserid() {

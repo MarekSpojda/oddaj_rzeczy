@@ -45,7 +45,7 @@
 
     <section class="login-page">
         <h2>Załóż konto</h2>
-        <form action="/register" method="post">
+        <form:form action="/register" method="post" modelAttribute="userDTO">
             <div class="form-group">
                 <input type="text" name="name" placeholder="Imię"/>
             </div>
@@ -66,7 +66,7 @@
                 <a href="/login" class="btn btn--without-border">Zaloguj się</a>
                 <button class="btn" type="submit">Załóż konto</button>
             </div>
-        </form>
+        </form:form>
     </section>
 </header>
 
