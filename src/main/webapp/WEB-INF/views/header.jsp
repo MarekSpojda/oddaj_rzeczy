@@ -4,10 +4,17 @@
     <nav class="container container--70">
         <ul class="nav--actions">
             <sec:authentication var="user" property="principal"/>
-            <sec:authorize access="hasRole('ROLE_USER') and isAuthenticated()">
+            <sec:authorize access="isAuthenticated()">
                 <li>
                     <button class="btn btn--small btn--highlighted">Witaj ${user.name} ${user.surname}</button>
                 </li>
+            </sec:authorize>
+
+            <sec:authorize access="hasRole('ROLE_ADMIN') and isAuthenticated()">
+                <li><a href="/admin" class="btn btn--small btn--highlighted">Panel administratora</a></li>
+            </sec:authorize>
+
+            <sec:authorize access="hasRole('ROLE_USER') and isAuthenticated()">
                 <li><a href="/logged" class="btn btn--small btn--highlighted">Menu</a></li>
                 <li><a href="/logout" class="btn btn--small btn--highlighted">Wyloguj</a></li>
             </sec:authorize>

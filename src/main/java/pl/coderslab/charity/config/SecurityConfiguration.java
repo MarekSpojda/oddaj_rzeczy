@@ -10,10 +10,14 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.coderslab.charity.service.CustomUserDetailsService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -53,22 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/logged")
                 .permitAll();
     }
-
-//    @Bean
-//    public PasswordEncoder getPasswordEncoder() {
-//        return new PasswordEncoder() {
-//            @Override
-//            public String encode(CharSequence charSequence) {
-//                return charSequence.toString();
-//            }
-//
-//            @Override
-//            public boolean matches(CharSequence charSequence, String s) {
-//                return true;
-//            }
-//        };
-//    }
 }

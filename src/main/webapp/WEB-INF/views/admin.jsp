@@ -52,7 +52,7 @@
 
     <div class="slogan container container--90">
         <h2>
-            To jest widoczne dla standardowego użytkownika tylko po zalogowaniu.
+            To jest widoczne dla administratora tylko po zalogowaniu.
         </h2>
     </div>
 </header>
