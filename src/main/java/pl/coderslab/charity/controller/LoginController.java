@@ -1,7 +1,6 @@
 package pl.coderslab.charity.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +31,6 @@ public class LoginController implements ErrorController {
     @GetMapping("/admin")
     public String onlyForLoggedAdmin(HttpServletRequest request) {
         //This method display content that should be viewable only to logged users, such as menus or account manager.
-        //TODO Should be filled with content.
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "admin";
         }
